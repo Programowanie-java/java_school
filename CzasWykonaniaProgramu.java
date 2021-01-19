@@ -10,6 +10,7 @@ class CzasWykonaniaProgramu{
 		//liczba = sc.nextInt();
 		int los = rand.nextInt(maksymalna)+1;
 		long millisActualTime = System.currentTimeMillis();
+		
 		for(int i =0;i<maksymalna;i++){
 			los = rand.nextInt(maksymalna)+1;
 			//System.out.println(los);
