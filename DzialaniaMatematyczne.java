@@ -25,11 +25,13 @@ class DzialaniaMatematyczne{
                 defaultText();
         }
     }
-    
+    //Text który pojawia się jak nie wybiorę dostępnej opcji
     private static void defaultText(){
         System.out.println("Nie ma takiej opcji");
     }
-    
+    /*
+        Menu aplikacji
+    */
     private static void menu(){
         System.out.println("Pomocnik młodego matematyka");
         System.out.println("1 - Potęgowanie dwóch liczb");
