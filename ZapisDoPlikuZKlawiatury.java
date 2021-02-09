@@ -3,9 +3,6 @@ import java.io.*; //* - wszystkie clasy/biblioteki z java.io
 
 class ZapisDoPlikuZKlawiatury{
 	public static void main(String [] a){
-        String path = File.separator+"src"+File.separator+
-            "main"+File.separator;
-        System.out.println(path);
 		File f = new File("dane.txt");
 		Scanner sc = new Scanner(System.in);
 		String s = sc.nextLine();
