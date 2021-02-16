@@ -5,6 +5,12 @@
  */
 package pl.home.local.adams.notatki;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author adams
@@ -16,6 +22,7 @@ public class Notatki extends javax.swing.JFrame {
      */
     public Notatki() {
         initComponents();
+        createDirectoriesAndFiles();
     }
 
     /**
@@ -147,7 +154,23 @@ public class Notatki extends javax.swing.JFrame {
             }
         });
     }
-
+    private void createDirectoriesAndFiles(){
+        try {
+            File directory = new File("."+File.separator+"dane");
+            if (!directory.exists()){
+                directory.mkdir();
+            }
+            File file = new File("."+File.separator+"dane"+File.separator+"test.txt");
+            if(!file.exists()){
+                file.createNewFile();
+            }
+//            FileWriter fw = new FileWriter(file);
+//            fw.write("Testowanie działania");
+//            fw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Notatki.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton as_JBSave;
     private javax.swing.JButton as_jBClear;
