@@ -1,0 +1,25 @@
+    
+Wklej poniższy kod do pom.xml w swoim projekcie NetBeans zaraz pod:
+<version>1.0-SNAPSHOT</version>
+<packaging>jar</packaging>
+    
+
+TO WKLEJAMY:    
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <!-- give full qualified name of your main class-->
+                            <mainClass>pl.home.local.adams.notatki.Notatki</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build> 
