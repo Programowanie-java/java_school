@@ -156,10 +156,19 @@ public class Notatki extends javax.swing.JFrame {
     }
     private void createDirectoriesAndFiles(){
         try {
+            /**
+             * Utworzenie folderu dane jeśli nie istnieje w miejscu w którym uruchomiliśmy program (plik jar)
+             * Istotne jest aby na początku dodać ".".
+             */
             File directory = new File("."+File.separator+"dane");
             if (!directory.exists()){
                 directory.mkdir();
             }
+            /**
+             * Utworzenie pliku test.txt jeśli nie istnieje w miejscu w którym uruchomiliśmy program (plik jar)
+             * a dokładniej w folderze dane.
+             * Istotne jest aby na początku dodać ".".
+             */
             File file = new File("."+File.separator+"dane"+File.separator+"test.txt");
             if(!file.exists()){
                 file.createNewFile();
