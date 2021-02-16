@@ -16,7 +16,8 @@ TO WKLEJAMY:
                     <archive>
                         <manifest>
                             <!-- give full qualified name of your main class-->
-                            <mainClass>pl.home.local.adams.notatki.Notatki</mainClass>
+                            <!-- Wklejamy np: pl.home.adams.Notatki-->
+                            <mainClass>nazwa pakietu.Plik zawierajacy metodę main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
