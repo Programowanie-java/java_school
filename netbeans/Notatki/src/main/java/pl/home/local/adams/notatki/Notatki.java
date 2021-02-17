@@ -9,6 +9,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -133,9 +136,18 @@ public class Notatki extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void as_JBSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_as_JBSaveActionPerformed
+        //pobranie tekstu z pola tekstowego i zapisanie do zmiennej title 
         String title = as_jTFTitle.getText();
+        //pobranie tekstu z pola tekstowego i zapisanie do zmiennej contents
         String contents = as_jTAContents.getText();
-        saveDataToFile("t;"+title+"\n"+"c;"+contents+"\n\n");
+        //Pobranie aktualnej daty i godziny
+        LocalDateTime localDateTime = LocalDateTime.now();
+        //Stworzenie formtowanie daty
+        DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        //Sformatowanie daty wg określonego wyżej formatu
+        String formattedDate = localDateTime.format(formatDateTime);
+        //Zapis do pliku
+        saveDataToFile("d;"+formattedDate+"\n"+"t;"+title+"\n"+"c;"+contents+"\n\n");
     }//GEN-LAST:event_as_JBSaveActionPerformed
 
     private void as_jBClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_as_jBClearActionPerformed

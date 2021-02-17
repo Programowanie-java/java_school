@@ -1,0 +1,11 @@
+t;Zapis
+c;Treść 
+Mojeje wiadomości
+
+t;Druga notatka
+c;Tutaj znajduje się moja druga notatka
+
+d;17-02-2021 10:29:33
+t;Pierwsza notatka
+c;Udało się stworzyć aplikację
+
