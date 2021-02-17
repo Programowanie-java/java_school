@@ -5,6 +5,7 @@
  */
 package pl.home.local.adams.notatki;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,13 +17,14 @@ import java.util.logging.Logger;
  * @author adams
  */
 public class Notatki extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form Notatki
      */
     public Notatki() {
         initComponents();
         createDirectoriesAndFiles();
+        
     }
 
     /**
@@ -53,6 +55,11 @@ public class Notatki extends javax.swing.JFrame {
         as_jBClear.setText("Wyczyść");
 
         as_JBSave.setText("Zapisz");
+        as_JBSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                as_JBSaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -120,6 +127,12 @@ public class Notatki extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void as_JBSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_as_JBSaveActionPerformed
+        String title = as_jTFTitle.getText();
+        String contents = as_jTAContents.getText();
+        saveDataToFile(title+"\n"+contents);
+    }//GEN-LAST:event_as_JBSaveActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -157,8 +170,7 @@ public class Notatki extends javax.swing.JFrame {
     private void createDirectoriesAndFiles(){
         try {
             /**
-             * Utworzenie folderu dane jeśli nie istnieje w miejscu w którym uruchomiliśmy program (plik jar)
-             * Istotne jest aby na początku dodać ".".
+             * Utworzenie folderu dane jeśli nie istnieje w miejscu w którym uruchomiliśmy program (plik jar).
              */
             File directory = new File("."+File.separator+"dane");
             if (!directory.exists()){
@@ -167,9 +179,7 @@ public class Notatki extends javax.swing.JFrame {
             /**
              * Utworzenie pliku test.txt jeśli nie istnieje w miejscu w którym uruchomiliśmy program (plik jar)
              * a dokładniej w folderze dane.
-             * Istotne jest aby na początku dodać ".".
              */
-            File file = new File("."+File.separator+"dane"+File.separator+"test.txt");
             if(!file.exists()){
                 file.createNewFile();
             }
@@ -180,6 +190,31 @@ public class Notatki extends javax.swing.JFrame {
             Logger.getLogger(Notatki.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    /**
+     * Function save data to file
+     * @param data - data to save to file
+     */
+    private void saveDataToFile(String data){
+       //Spróbuj zapisać do pliku
+        try {
+            //  Ustawienie zapisu do pliku
+            BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+            //Zapis do pliku
+            bw.write(data);
+            //Zamknięcie dostępu do pliku =====WAŻNE=====
+            bw.close();
+        } catch (IOException ex) { 
+            //Jak nie uda się zapisać do pliku wykonaj poniższe instrukcje
+            System.out.println(ex.toString());
+        }
+    }
+    /**
+     * Globalnie zdefiniowane zmienne directory i file - będziemy używać w kilku miejscach aplikacji
+     * Istotne jest aby na początku dodać ".".
+    */
+    
+    File file = new File("."+File.separator+"dane"+File.separator+"test.txt");
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton as_JBSave;
     private javax.swing.JButton as_jBClear;

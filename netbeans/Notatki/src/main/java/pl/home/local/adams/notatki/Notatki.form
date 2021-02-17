@@ -120,6 +120,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Zapisz"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="as_JBSaveActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
