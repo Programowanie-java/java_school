@@ -130,7 +130,7 @@ public class Notatki extends javax.swing.JFrame {
     private void as_JBSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_as_JBSaveActionPerformed
         String title = as_jTFTitle.getText();
         String contents = as_jTAContents.getText();
-        saveDataToFile(title+"\n"+contents);
+        saveDataToFile(title+"\n"+contents+"\n\n");
     }//GEN-LAST:event_as_JBSaveActionPerformed
 
     /**
