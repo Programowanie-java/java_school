@@ -115,6 +115,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Wyczy&#x15b;&#x107;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="as_jBClearActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="as_JBSave">
               <Properties>

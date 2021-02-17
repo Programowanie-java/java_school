@@ -53,6 +53,11 @@ public class Notatki extends javax.swing.JFrame {
         jScrollPane1.setViewportView(as_jTAContents);
 
         as_jBClear.setText("Wyczyść");
+        as_jBClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                as_jBClearActionPerformed(evt);
+            }
+        });
 
         as_JBSave.setText("Zapisz");
         as_JBSave.addActionListener(new java.awt.event.ActionListener() {
@@ -133,6 +138,11 @@ public class Notatki extends javax.swing.JFrame {
         saveDataToFile("t;"+title+"\n"+"c;"+contents+"\n\n");
     }//GEN-LAST:event_as_JBSaveActionPerformed
 
+    private void as_jBClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_as_jBClearActionPerformed
+        as_jTFTitle.setText("");
+        as_jTAContents.setText("");
+    }//GEN-LAST:event_as_jBClearActionPerformed
+    
     /**
      * @param args the command line arguments
      */
