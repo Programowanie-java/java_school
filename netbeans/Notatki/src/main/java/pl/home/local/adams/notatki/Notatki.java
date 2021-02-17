@@ -198,7 +198,7 @@ public class Notatki extends javax.swing.JFrame {
        //Spróbuj zapisać do pliku
         try {
             //  Ustawienie zapisu do pliku
-            BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(file,true));
             //Zapis do pliku
             bw.write(data);
             //Zamknięcie dostępu do pliku =====WAŻNE=====
