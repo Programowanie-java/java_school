@@ -13,6 +13,7 @@ class ZapisDoPlikuZKlawiatury{
                 s = s+"\n"+temp;
             }
 		}
+		//Zapis do pliku
 		try{
 			FileWriter fw = new FileWriter(f);
 			fw.write(s);
