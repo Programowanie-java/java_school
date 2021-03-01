@@ -13,6 +13,16 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Tools"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMIleDniMiedzyDatami">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ile dni pomi&#x119;dzy datami"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMIleDniMiedzyDatamiActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
       </SubComponents>
     </Menu>

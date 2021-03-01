@@ -5,6 +5,9 @@
  */
 package pl.home.local.adams.kalkulator;
 
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author adams
@@ -34,6 +37,7 @@ public class Kalkulator extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMFile = new javax.swing.JMenu();
         JMTools = new javax.swing.JMenu();
+        jMIleDniMiedzyDatami = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,6 +75,15 @@ public class Kalkulator extends javax.swing.JFrame {
         jMenuBar1.add(jMFile);
 
         JMTools.setText("Tools");
+
+        jMIleDniMiedzyDatami.setText("Ile dni pomiędzy datami");
+        jMIleDniMiedzyDatami.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIleDniMiedzyDatamiActionPerformed(evt);
+            }
+        });
+        JMTools.add(jMIleDniMiedzyDatami);
+
         jMenuBar1.add(JMTools);
 
         setJMenuBar(jMenuBar1);
@@ -94,6 +107,12 @@ public class Kalkulator extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMIleDniMiedzyDatamiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIleDniMiedzyDatamiActionPerformed
+        //Narzędzie pozwalające na zamianę wprowadzonego tekstu na datę
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");   
+        JOptionPane.showInputDialog("Wprowadź datę w formacie dd mm yyyy np: 01 02 2021");
+    }//GEN-LAST:event_jMIleDniMiedzyDatamiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,6 +153,7 @@ public class Kalkulator extends javax.swing.JFrame {
     private javax.swing.JMenu JMTools;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMFile;
+    private javax.swing.JMenuItem jMIleDniMiedzyDatami;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
