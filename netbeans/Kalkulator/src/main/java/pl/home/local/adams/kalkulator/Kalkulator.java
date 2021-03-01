@@ -5,6 +5,7 @@
  */
 package pl.home.local.adams.kalkulator;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 
@@ -111,7 +112,11 @@ public class Kalkulator extends javax.swing.JFrame {
     private void jMIleDniMiedzyDatamiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIleDniMiedzyDatamiActionPerformed
         //Narzędzie pozwalające na zamianę wprowadzonego tekstu na datę
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");   
-        JOptionPane.showInputDialog("Wprowadź datę w formacie dd mm yyyy np: 01 02 2021");
+        String data = JOptionPane.showInputDialog("Wprowadź datę w formacie dd mm yyyy np: 01 02 2021");
+//        System.out.println(data);
+        LocalDate ldnow = LocalDate.now(); 
+        LocalDate ldinput = LocalDate.parse(data, formatter); //zrobienie LocalDate z tekstu dzięki formatter
+        System.out.println(ldnow+"   "+ldinput);
     }//GEN-LAST:event_jMIleDniMiedzyDatamiActionPerformed
 
     /**
