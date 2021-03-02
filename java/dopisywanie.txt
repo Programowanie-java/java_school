@@ -1,0 +1,4 @@
+To się zapisze w pliku
+To się zapisze w pliku
+Pole kwadratu o boku 5 = 25
+Pole kwadratu o boku 10 = 100
