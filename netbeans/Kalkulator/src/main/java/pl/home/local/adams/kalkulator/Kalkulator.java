@@ -7,6 +7,7 @@ package pl.home.local.adams.kalkulator;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import javax.swing.JOptionPane;
 
@@ -113,17 +114,29 @@ public class Kalkulator extends javax.swing.JFrame {
     private void jMIleDniMiedzyDatamiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIleDniMiedzyDatamiActionPerformed
         //Narzędzie pozwalające na zamianę wprowadzonego tekstu na datę
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");   
-        String data = JOptionPane.showInputDialog("Wprowadź datę w formacie dd mm yyyy np: 01 02 2021");
-//        System.out.println(data);
-        if(data != null && data.length() == 10){
-            LocalDate ldnow = LocalDate.now(); 
-            //DateTimeParseException
-            LocalDate ldinput = LocalDate.parse(data, formatter); //zrobienie LocalDate z tekstu dzięki formatter
-    //        System.out.println(ldnow+"   "+ldinput);
-            long days = ChronoUnit.DAYS.between(ldinput, ldnow);
-    //        System.out.println("Ilość dni między datami: "+days);
-            JOptionPane.showMessageDialog(rootPane, ""+days, "Ilość dni", HEIGHT);
-        }
+        String info = "";
+        while(!info.equals("ok")){
+            String data = JOptionPane.showInputDialog("Wprowadź datę w formacie dd mm yyyy np: 01 02 2021"
+                + ""+info);
+    //        System.out.println(data);
+            if(data != null && data.length() == 10){
+                LocalDate ldnow = LocalDate.now(); 
+                //DateTimeParseException
+                try{
+                     LocalDate ldinput = LocalDate.parse(data, formatter); //zrobienie LocalDate z tekstu dzięki formatter
+    //                 System.out.println(ldnow+"   "+ldinput);
+                     long days = ChronoUnit.DAYS.between(ldinput, ldnow);
+    //                   System.out.println("Ilość dni między datami: "+days);
+                     JOptionPane.showMessageDialog(rootPane, ""+days, "Ilość dni", HEIGHT);
+                     info = "ok";
+                } catch(DateTimeParseException ex){
+                    info = "\nWprowadzono zły format daty!!!";
+                }
+            } else {
+                info = "ok";
+            }
+        }//koniec pętli while
+        
         
     }//GEN-LAST:event_jMIleDniMiedzyDatamiActionPerformed
 
