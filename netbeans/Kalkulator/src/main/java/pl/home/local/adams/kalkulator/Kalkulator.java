@@ -136,8 +136,6 @@ public class Kalkulator extends javax.swing.JFrame {
                 info = "ok";
             }
         }//koniec pętli while
-        
-        
     }//GEN-LAST:event_jMIleDniMiedzyDatamiActionPerformed
 
     /**
