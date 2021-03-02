@@ -115,11 +115,15 @@ public class Kalkulator extends javax.swing.JFrame {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");   
         String data = JOptionPane.showInputDialog("Wprowadź datę w formacie dd mm yyyy np: 01 02 2021");
 //        System.out.println(data);
-        LocalDate ldnow = LocalDate.now(); 
-        LocalDate ldinput = LocalDate.parse(data, formatter); //zrobienie LocalDate z tekstu dzięki formatter
-//        System.out.println(ldnow+"   "+ldinput);
-        long days = ChronoUnit.DAYS.between(ldinput, ldnow);
-//        System.out.println("Ilość dni między datami: "+days);
+        if(data != null && data.length() == 10){
+            LocalDate ldnow = LocalDate.now(); 
+            //DateTimeParseException
+            LocalDate ldinput = LocalDate.parse(data, formatter); //zrobienie LocalDate z tekstu dzięki formatter
+    //        System.out.println(ldnow+"   "+ldinput);
+            long days = ChronoUnit.DAYS.between(ldinput, ldnow);
+    //        System.out.println("Ilość dni między datami: "+days);
+            JOptionPane.showMessageDialog(rootPane, ""+days, "Ilość dni", HEIGHT);
+        }
         
     }//GEN-LAST:event_jMIleDniMiedzyDatamiActionPerformed
 
