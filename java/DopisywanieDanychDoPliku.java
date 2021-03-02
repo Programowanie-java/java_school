@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.io.*; //* - wszystkie clasy/biblioteki z java.io
 
 class DopisywanieDanychDoPliku{
+
 	public static void main(String [] args){
         //Stworzenie dowiązania do pliku
 		File f = new File("dopisywanie.txt");
