@@ -105,7 +105,7 @@
                               <EmptySpace pref="38" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel3" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
-                                  <Component id="jTextField3" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
+                                  <Component id="jTFData" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -131,7 +131,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jTFCoKupiles" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTFWartosc" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTFData" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -179,7 +179,7 @@
                 <Property name="text" type="java.lang.String" value="Data zakupu"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField3">
+            <Component class="javax.swing.JTextField" name="jTFData">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>

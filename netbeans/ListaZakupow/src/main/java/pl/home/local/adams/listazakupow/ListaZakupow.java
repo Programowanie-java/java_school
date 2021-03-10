@@ -1,5 +1,7 @@
 package pl.home.local.adams.listazakupow;
 
+
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -19,6 +21,7 @@ public class ListaZakupow extends javax.swing.JFrame{
         initComponents();
         addKeyListenerTojTFCoKupiles();
         addKeyListenerTojTFWartosc();
+        addKeyListenerTojTFData();
     }
 
     @SuppressWarnings("unchecked")
@@ -32,7 +35,7 @@ public class ListaZakupow extends javax.swing.JFrame{
         jLabel2 = new javax.swing.JLabel();
         jTFWartosc = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jTFData = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTADzisiejszeZakupy = new javax.swing.JTextArea();
@@ -107,7 +110,7 @@ public class ListaZakupow extends javax.swing.JFrame{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                         .addGroup(jPWprowadzZakupyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTFData, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPWprowadzZakupyLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1)))
@@ -126,7 +129,7 @@ public class ListaZakupow extends javax.swing.JFrame{
                 .addGroup(jPWprowadzZakupyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFCoKupiles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTFWartosc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPWprowadzZakupyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -239,13 +242,39 @@ public class ListaZakupow extends javax.swing.JFrame{
         });
     }
    
+    private void addKeyListenerTojTFData(){
+        jTFData.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char ch = e.getKeyChar();
+                if(ch >= '0'  && ch <= '9'  || ch == KeyEvent.VK_BACK_SPACE){  
+                    jTFData.setEditable(true);
+//                    System.out.println("NACIŚNIĘTO CYFRĘ: "+ch);
+                } else {
+                    jTFData.setEditable(false);
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+    }
+    
     private void addKeyListenerTojTFWartosc(){
         jTFWartosc.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
                 char ch = e.getKeyChar();
-                if(ch == '0' || ch == '1' || ch == '2' || ch == '3' || ch == '4' || ch == '5' || ch == '6' || ch == '7' || ch == '8' || ch == '9'){
-                    System.out.println("NACIŚNIĘTO CYFRĘ: "+ch);
+                if(ch >= '0'  && ch <= '9'  || ch == KeyEvent.VK_BACK_SPACE){  
+                    jTFWartosc.setEditable(true);
+//                    System.out.println("NACIŚNIĘTO CYFRĘ: "+ch);
+                } else {
+                    jTFWartosc.setEditable(false);
                 }
             }
 
@@ -279,9 +308,9 @@ public class ListaZakupow extends javax.swing.JFrame{
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTADzisiejszeZakupy;
     private javax.swing.JTextField jTFCoKupiles;
+    private javax.swing.JTextField jTFData;
     private javax.swing.JTextField jTFWartosc;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
