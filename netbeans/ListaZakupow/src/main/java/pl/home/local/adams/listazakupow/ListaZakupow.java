@@ -246,9 +246,16 @@ public class ListaZakupow extends javax.swing.JFrame{
         jTFData.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
+                String temp = jTFData.getText();
                 char ch = e.getKeyChar();
-                if(ch >= '0'  && ch <= '9'  || ch == KeyEvent.VK_BACK_SPACE){  
+                if(  (ch >= '0'  && ch <= '9'  || ch == KeyEvent.VK_BACK_SPACE) && 
+                        (temp.length() <10 || ch == KeyEvent.VK_BACK_SPACE)
+                        ) {  
                     jTFData.setEditable(true);
+                    //Jeśli długośći tekstu jest równa 4 lub 7 znaków i znak różny od backspace dodaj -
+                    if( (temp.length() == 4 || temp.length() == 7) && ch != KeyEvent.VK_BACK_SPACE){
+                        jTFData.setText(temp+'-');
+                    }
 //                    System.out.println("NACIŚNIĘTO CYFRĘ: "+ch);
                 } else {
                     jTFData.setEditable(false);
@@ -270,12 +277,28 @@ public class ListaZakupow extends javax.swing.JFrame{
             @Override
             public void keyTyped(KeyEvent e) {
                 char ch = e.getKeyChar();
-                if(ch >= '0'  && ch <= '9'  || ch == KeyEvent.VK_BACK_SPACE){  
-                    jTFWartosc.setEditable(true);
-//                    System.out.println("NACIŚNIĘTO CYFRĘ: "+ch);
+                String temp = jTFWartosc.getText();
+              
+                if(temp.contains(",") ){
+                    String [] splitted = temp.split(",");
+                    if(splitted[1].length() < 2){
+                        if(ch >= '0'  && ch <= '9'  || ch == KeyEvent.VK_BACK_SPACE){  
+                            jTFWartosc.setEditable(true);
+                        } else {
+                            jTFWartosc.setEditable(false);
+                        }
+                    } //TODO jeśłi będzie po przecinku za długo tekst to co zrobimy????
+                    
                 } else {
-                    jTFWartosc.setEditable(false);
+                    if(ch >= '0'  && ch <= '9'  || ch == KeyEvent.VK_BACK_SPACE || ch == ','){  
+                        jTFWartosc.setEditable(true);
+    //                    System.out.println("NACIŚNIĘTO CYFRĘ: "+ch);
+                    } else {
+                        jTFWartosc.setEditable(false);
+                    }
                 }
+                
+                
             }
 
             @Override
