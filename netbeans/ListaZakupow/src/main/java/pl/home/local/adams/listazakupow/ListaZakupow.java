@@ -222,10 +222,12 @@ public class ListaZakupow extends javax.swing.JFrame{
         jTFCoKupiles.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-                
-                if(e.getKeyChar() == KeyEvent.VK_ENTER){
-                    System.out.println("Wprowadzono dane po naciśnięciu ENTERA");
-                    jTADzisiejszeZakupy.setText(jTFCoKupiles.getText());
+                char ch = e.getKeyChar();
+                if(ch > 'a' && ch < 'z' || ch == KeyEvent.VK_SPACE || ch == KeyEvent.VK_BACK_SPACE){
+                    jTFCoKupiles.setEditable(true);
+                    //jTADzisiejszeZakupy.setText(jTFCoKupiles.getText());
+                } else {
+                    jTFCoKupiles.setEditable(false);
                 }
                 
             }
