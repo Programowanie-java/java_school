@@ -22,6 +22,8 @@ public class ListaZakupow extends javax.swing.JFrame{
         addKeyListenerTojTFCoKupiles();
         addKeyListenerTojTFWartosc();
         addKeyListenerTojTFData();
+        addTooltipToElements();
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -44,8 +46,8 @@ public class ListaZakupow extends javax.swing.JFrame{
         jLabel6 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        jCBProducts = new javax.swing.JComboBox<>();
+        jBSave = new javax.swing.JButton();
         jPListaZakupow = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -71,9 +73,14 @@ public class ListaZakupow extends javax.swing.JFrame{
 
         jLabel7.setText("Typ zakupionego towaru");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBProducts.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jButton1.setText("ZAPISZ");
+        jBSave.setText("ZAPISZ");
+        jBSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPWprowadzZakupyLayout = new javax.swing.GroupLayout(jPWprowadzZakupy);
         jPWprowadzZakupy.setLayout(jPWprowadzZakupyLayout);
@@ -105,7 +112,7 @@ public class ListaZakupow extends javax.swing.JFrame{
                         .addComponent(jTextField4))
                     .addGroup(jPWprowadzZakupyLayout.createSequentialGroup()
                         .addGroup(jPWprowadzZakupyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCBProducts, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                         .addGroup(jPWprowadzZakupyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,7 +120,7 @@ public class ListaZakupow extends javax.swing.JFrame{
                             .addComponent(jTFData, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPWprowadzZakupyLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(jBSave)))
                 .addContainerGap())
         );
         jPWprowadzZakupyLayout.setVerticalGroup(
@@ -130,11 +137,11 @@ public class ListaZakupow extends javax.swing.JFrame{
                     .addComponent(jTFCoKupiles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTFWartosc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTFData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCBProducts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPWprowadzZakupyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jButton1))
+                    .addComponent(jBSave))
                 .addGap(18, 18, 18)
                 .addGroup(jPWprowadzZakupyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -185,6 +192,14 @@ public class ListaZakupow extends javax.swing.JFrame{
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSaveActionPerformed
+        //TUTAJ BĘDZIE ZAPIS Z KLASY
+        FileUtils stf = new FileUtils();
+        String text = jTFCoKupiles.getText().trim()+";"+jTFWartosc.getText().trim()+";"
+                +jCBProducts.getSelectedItem().toString().trim()+";"+jTFData.getText().trim();
+        stf.saveToFile(text);
+    }//GEN-LAST:event_jBSaveActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -289,7 +304,7 @@ public class ListaZakupow extends javax.swing.JFrame{
                         } else {
                             jTFWartosc.setEditable(false);
                         }
-                    } //TODO jeśłi będzie po przecinku za długo tekst to co zrobimy????
+                    } //TODO jeśli będzie po przecinku za długo tekst to co zrobimy????
                     
                 } else {
                     if(ch >= '0'  && ch <= '9'  || ch == KeyEvent.VK_BACK_SPACE || ch == ','){  
@@ -305,19 +320,29 @@ public class ListaZakupow extends javax.swing.JFrame{
 
             @Override
             public void keyPressed(KeyEvent e) {
+                
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
+                
             }
         });
     }
+
+    private void addTooltipToElements(){
+        jTFCoKupiles.setToolTipText("<html>"
+                + "<h3>Wprowadź tekst</h3>"
+                + "<p>Nie używaj polskich znaków</p>"
+                + "</html>");
+    }
     
-    
+    private String file_name = "lista_zakupow.csv";
+    private String product_names = "produckt_names.csv";
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jBSave;
+    private javax.swing.JComboBox<String> jCBProducts;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
