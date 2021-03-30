@@ -4,8 +4,10 @@ import java.util.InputMismatchException;
 
 class PierwszyKonstruktor{
 	public static void main(String[] args){
-		obliczanieBmi();
+		//obliczanieBmi();
 		
+		ImieNazwisko in = new ImieNazwisko("Adam","Stelmaszyk");
+		System.out.println(in);
 	}
 	
 	private static void testowanie(){
