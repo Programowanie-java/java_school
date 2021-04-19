@@ -28,6 +28,7 @@ public class ListaZakupow extends javax.swing.JFrame{
         addKeyListenerTojTFData();
         addTooltipToElements();
         filljCBProducts();
+        filljTSdzisiejszeZakupy();
     }
 
     @SuppressWarnings("unchecked")
@@ -233,6 +234,11 @@ public class ListaZakupow extends javax.swing.JFrame{
                 new ListaZakupow().setVisible(true);
             }
         });
+    }
+    
+    private void filljTSdzisiejszeZakupy(){
+        FileUtils fu = new FileUtils();    
+        jTADzisiejszeZakupy.setText(fu.readFromFile());
     }
     
     private void addKeyListenerTojTFCoKupiles(){
