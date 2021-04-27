@@ -4,12 +4,17 @@ import java.time.format.DateTimeFormatter;
 class Main{
 	public static void main(String[] args){
 		//testSaveToFile();
-		DateTimeFormatter dTF = DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss.N");
+		testingDateTimeFormatter();
+	}
+	
+	private static void testingDateTimeFormatter(){
+		DateTimeFormatter dTF = DateTimeFormatter.ofPattern("YYYY/MM/dd HH:mm:ss");
 		LocalDateTime lDT1 = LocalDateTime.now();
 		System.out.println(dTF.format(lDT1));
-		
-		LocalDateTime lDT2 = LocalDateTime.parse("2021-04-26T09:30:42.826682289");
-		System.out.println(lDT2);
+		//LocalDateTime lDT2 = LocalDateTime.parse("2021-04-26T09:30:42.826682289");
+		//System.out.println(lDT2);
+		dTF = DateTimeFormatter.ofPattern("YYYY LLLL dd");
+		System.out.println(dTF.format(lDT1));
 	}
 	
 	//Testowanie zapisu i odczytu  pliku

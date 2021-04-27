@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.format.DateTimeFormatter;
+
 class FileUtils{
 	/*
 	 * Save ToDo to filename alltodo.csv in format:
@@ -15,8 +17,9 @@ class FileUtils{
 			File f = new File("alltodo.csv");
 			FileWriter fw = new FileWriter(f,true);
 			String title = td.getTitle();
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss");
 			fw.write(td.getTitle()+";"+td.getContent()+";"+td.getAuthor()
-				+";"+td.getAdd_Date()+"\n");
+				+";"+dtf.format(td.getAdd_Date())+"\n");
 			fw.close();
 		} catch(IOException ex){
 			System.out.println("UPS! "+ex.toString());

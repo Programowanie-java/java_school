@@ -42,5 +42,4 @@ class ToDo {
 			+"Author: "+author+"\n"
 			+"Data: "+add_date+"\n";
 	}
-	
 }

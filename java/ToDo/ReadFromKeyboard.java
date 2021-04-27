@@ -1,9 +1,9 @@
 import java.util.Scanner;
 
 class ReadFromKeyboard{
+	
 	public ToDo readOneToDo(){
 		Scanner sc = new Scanner(System.in);
-		
 		System.out.println("Podaj tytuł: ");
 		String title = sc.nextLine();
 		System.out.println("Podaj treść notatki: ");
@@ -16,6 +16,5 @@ class ReadFromKeyboard{
 		} else {
 			return new ToDo(title,content,author);
 		}
-
 	}
 }
