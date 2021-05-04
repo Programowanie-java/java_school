@@ -16,7 +16,8 @@ import javax.swing.JButton;
  * @author adams
  */
 public class GameWindow extends javax.swing.JFrame {
-
+    private boolean player = false;
+    private Player p1, p2;
     /**
      * Creates new form GameWindow
      */
@@ -27,7 +28,8 @@ public class GameWindow extends javax.swing.JFrame {
     }
     
     private void initGame(){
-        if(DrawPlayer.randomPlayer()){
+        player = DrawPlayer.randomPlayer();
+        if(player){
             jLPlayer1.setBackground(Color.GREEN);
             jLPlayer2.setBackground(Color.GRAY);
         } else {
@@ -37,9 +39,13 @@ public class GameWindow extends javax.swing.JFrame {
         if(DrawPlayer.randomSign()){
             jLPlayer1Sign.setText("O");
             jLPlayer2Sign.setText("X");
+            p1 = new Player("O", jTFPlayer1Name.getText());
+            p2 = new Player("X", jTFPlayer2Name.getText());
         } else {
             jLPlayer1Sign.setText("X");
             jLPlayer2Sign.setText("O");
+            p1 = new Player("X", jTFPlayer1Name.getText());
+            p2 = new Player("O", jTFPlayer2Name.getText());
         }
     }
     /**
@@ -107,7 +113,16 @@ public class GameWindow extends javax.swing.JFrame {
     
     private void setCircleOrCross(ActionEvent evt) {                                        
         JButton b = (JButton) evt.getSource();
-        b.setText("X");
+        if(player){
+            b.setText(p1.getSign());
+            jLPlayer1.setBackground(Color.GRAY);
+            jLPlayer2.setBackground(Color.GREEN);
+        } else {
+            b.setText(p2.getSign());
+            jLPlayer1.setBackground(Color.GREEN);
+            jLPlayer2.setBackground(Color.GRAY);
+        }
+        player = !player; //Zmiana TRUE na FALS lub FLAS na TRUE
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -117,8 +132,8 @@ public class GameWindow extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jRBPlayervsPlayer = new javax.swing.JRadioButton();
         jRBPlayervsComputer = new javax.swing.JRadioButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        jTFPlayer1Name = new javax.swing.JTextField();
+        jTFPlayer2Name = new javax.swing.JTextField();
         jLPlayer1 = new javax.swing.JLabel();
         jLPlayer2 = new javax.swing.JLabel();
         jLPlayer1Sign = new javax.swing.JLabel();
@@ -159,7 +174,7 @@ public class GameWindow extends javax.swing.JFrame {
         jLPlayer2Sign.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jLPlayer2Sign.setText("O");
 
-        jBReset.setText("RESET");
+        jBReset.setText("Nowa Gra");
         jBReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBResetActionPerformed(evt);
@@ -251,7 +266,7 @@ public class GameWindow extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jRBPlayervsPlayer, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                            .addComponent(jTextField1)
+                            .addComponent(jTFPlayer1Name)
                             .addComponent(jLPlayer1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,7 +279,7 @@ public class GameWindow extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField2)
+                    .addComponent(jTFPlayer2Name)
                     .addComponent(jBReset, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
                     .addComponent(jLPlayer2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -279,8 +294,8 @@ public class GameWindow extends javax.swing.JFrame {
                     .addComponent(jBReset))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFPlayer1Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFPlayer2Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLPlayer1Sign)
                     .addComponent(jLPlayer2Sign))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -350,7 +365,7 @@ public class GameWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRBPlayervsComputer;
     private javax.swing.JRadioButton jRBPlayervsPlayer;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTFPlayer1Name;
+    private javax.swing.JTextField jTFPlayer2Name;
     // End of variables declaration//GEN-END:variables
 }

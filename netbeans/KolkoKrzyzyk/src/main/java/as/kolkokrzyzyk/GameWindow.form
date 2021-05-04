@@ -87,7 +87,7 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jRBPlayervsPlayer" pref="100" max="32767" attributes="0"/>
-                              <Component id="jTextField1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jTFPlayer1Name" alignment="0" max="32767" attributes="0"/>
                               <Component id="jLPlayer1" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -106,7 +106,7 @@
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jTextField2" max="32767" attributes="0"/>
+                      <Component id="jTFPlayer2Name" max="32767" attributes="0"/>
                       <Component id="jBReset" pref="97" max="32767" attributes="0"/>
                       <Component id="jLPlayer2" alignment="0" max="32767" attributes="0"/>
                   </Group>
@@ -125,8 +125,8 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTFPlayer1Name" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTFPlayer2Name" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLPlayer1Sign" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLPlayer2Sign" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -175,9 +175,9 @@
             <Property name="text" type="java.lang.String" value="vs Komputer"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="jTFPlayer1Name">
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField2">
+        <Component class="javax.swing.JTextField" name="jTFPlayer2Name">
         </Component>
         <Component class="javax.swing.JLabel" name="jLPlayer1">
           <Properties>
@@ -211,7 +211,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jBReset">
           <Properties>
-            <Property name="text" type="java.lang.String" value="RESET"/>
+            <Property name="text" type="java.lang.String" value="Nowa Gra"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBResetActionPerformed"/>
