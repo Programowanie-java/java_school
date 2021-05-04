@@ -4,12 +4,13 @@ class ToDo {
 	private String title = "";
 	private String content = "";
 	private String author = "Anonymous";
-	private LocalDateTime add_date = LocalDateTime.now();
+	private LocalDateTime add_date;
 	
 	//1 Constructor author unknown
 	public ToDo(String title, String content){
 		this.title = title;
 		this.content = content;
+		add_date = LocalDateTime.now();
 	}
 	
 	//2 Constructor 
@@ -17,6 +18,15 @@ class ToDo {
 		this.title = title;
 		this.content = content;
 		this.author = author;
+		add_date = LocalDateTime.now();
+	}
+	
+	//3 Constructor for read from file
+	public ToDo(String title, String content, String author, LocalDateTime add_date){
+		this.title = title;
+		this.content = content;
+		this.author = author;
+		this.add_date = add_date;
 	}
 	
 	public String getContent(){

@@ -1,10 +1,16 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 class Main{
 	public static void main(String[] args){
-		//testSaveToFile();
-		testingDateTimeFormatter();
+		ToDoUtils.showNotes();
+	}
+	
+	private static void readFormFile(){
+		FileUtils fu = new FileUtils();
+		fu.readFromFile();
 	}
 	
 	private static void testingDateTimeFormatter(){
@@ -20,8 +26,11 @@ class Main{
 	//Testowanie zapisu i odczytu  pliku
 	private static void testSaveToFile(){
 		FileUtils fu = new FileUtils();
-		fu.saveToFile(new ToDo("Drugi wpis",
-			"Drugi wiersz???"));
+		fu.saveToFile(new ToDo("Kończenie prac nad programem",
+			"Koniec prac na działaniem programu już jest blisko"));
+			
+		fu.saveToFile(new ToDo("Do zrobienie MENU",
+			"Zrobimy MENU w pętli aby można było wybierać, kasować, modyfikować nasze wpisy"));
 		fu.readFromFile();
 	}	
 	
