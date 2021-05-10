@@ -3,16 +3,50 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+//TODO - naprawić działanie w ToDoUtils aby użytkownik wpisując literkę lub liczbę spoza listy 
+// nie wykrzaczał programu
+
+
 class Main{
 	public static void main(String[] args){
-		ToDoUtils.showNotes();
+		//(new Menu()).menu(); //Obiekt anonimowy - bez przypisania do zmiennej
+		Scanner sc = new Scanner(System.in);
+		String choose = "";
+		while(!choose.equals("q")){
+			Menu.menu();
+			System.out.print(">>>> ");
+			choose = sc.next();
+			switch(choose.toLowerCase()){
+				case "1": {
+					ToDoUtils.showNotes();
+					break;
+				}
+				case "2": {
+					ToDoUtils.deleteNote();
+					break;
+				}
+				case "3": {
+					break;
+				}
+				case "4": {
+					break;
+				}
+				case "q": {
+					break;
+				}
+				default: {
+					System.out.println("Nie ma takiej opcji! Wybierz coś innego");
+				}
+			}
+		}
+		
+		
+		
+		//
 	}
 	
-	private static void readFormFile(){
-		FileUtils fu = new FileUtils();
-		fu.readFromFile();
-	}
-	
+	//Testowanie formatu daty!
 	private static void testingDateTimeFormatter(){
 		DateTimeFormatter dTF = DateTimeFormatter.ofPattern("YYYY/MM/dd HH:mm:ss");
 		LocalDateTime lDT1 = LocalDateTime.now();
@@ -27,10 +61,9 @@ class Main{
 	private static void testSaveToFile(){
 		FileUtils fu = new FileUtils();
 		fu.saveToFile(new ToDo("Kończenie prac nad programem",
-			"Koniec prac na działaniem programu już jest blisko"));
-			
+			"Koniec prac na działaniem programu już jest blisko"), true);
 		fu.saveToFile(new ToDo("Do zrobienie MENU",
-			"Zrobimy MENU w pętli aby można było wybierać, kasować, modyfikować nasze wpisy"));
+			"Zrobimy MENU w pętli aby można było wybierać, kasować, modyfikować nasze wpisy"),true);
 		fu.readFromFile();
 	}	
 	

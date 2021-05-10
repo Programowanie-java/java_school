@@ -1,5 +1,5 @@
 import java.time.LocalDateTime;
-
+//Jest to klasa przechowująca dane jednej notatki
 class ToDo {
 	private String title = "";
 	private String content = "";

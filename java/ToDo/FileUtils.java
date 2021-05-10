@@ -14,10 +14,30 @@ class FileUtils{
 	 * title;content;author;add_date
 	 * @param ToDo - out note
 	 * */
-	public void saveToFile(ToDo td){
+	
+	public void deleteOldNotesAndSaveNewNotes(ArrayList<ToDo> list){
 		try{
 			File f = new File("alltodo.csv");
-			FileWriter fw = new FileWriter(f,true);
+			FileWriter fw = new FileWriter(f,false);
+			fw.close();
+			fw = new FileWriter(f,true);
+			for(int i = 0;i<list.size();i++){
+				fw.write(list.get(i).getTitle()+";"+list.get(i).getContent()+
+				";"+list.get(i).getAuthor()+";"+
+				dtf.format(list.get(i).getAdd_Date())+"\n");
+			}
+			fw.close();
+		} catch(IOException ex){
+			System.out.println("UPS! "+ex.toString());
+		}
+	} 
+	 
+	 
+	 
+	public void saveToFile(ToDo td, boolean apped){
+		try{
+			File f = new File("alltodo.csv");
+			FileWriter fw = new FileWriter(f,apped); //Dopisywanie do pliku append=true
 			String title = td.getTitle();
 			fw.write(td.getTitle()+";"+td.getContent()+";"+td.getAuthor()
 				+";"+dtf.format(td.getAdd_Date())+"\n");
@@ -26,7 +46,10 @@ class FileUtils{
 			System.out.println("UPS! "+ex.toString());
 		}
 	}
-	
+	/**
+	 * Method to read from file all notes to ArraylList
+	 * @return ArrayList<ToDo>
+	 * */
 	public ArrayList<ToDo> readFromFile(){
 		ArrayList<ToDo> list = new ArrayList<>();
 		try{
