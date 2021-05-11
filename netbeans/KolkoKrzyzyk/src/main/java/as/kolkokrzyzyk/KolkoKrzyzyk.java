@@ -33,7 +33,7 @@ public class KolkoKrzyzyk {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GameWindow().setVisible(true);
+                new GameWindow().setVisible(true); //TUTAJ URUCHAMIANY JEST NASZ PROGRAM
             }
         });
     }

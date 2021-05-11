@@ -107,7 +107,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jTFPlayer2Name" max="32767" attributes="0"/>
-                      <Component id="jBReset" pref="97" max="32767" attributes="0"/>
+                      <Component id="jBNewGame" pref="97" max="32767" attributes="0"/>
                       <Component id="jLPlayer2" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -121,7 +121,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jRBPlayervsPlayer" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jRBPlayervsComputer" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jBReset" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBNewGame" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -209,12 +209,12 @@
             <Property name="text" type="java.lang.String" value="O"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jBReset">
+        <Component class="javax.swing.JButton" name="jBNewGame">
           <Properties>
             <Property name="text" type="java.lang.String" value="Nowa Gra"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBResetActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBNewGameActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton11">
@@ -349,6 +349,9 @@
               <Dimension value="[60, 60]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton13ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton23">
           <Properties>

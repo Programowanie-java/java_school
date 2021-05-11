@@ -1,15 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package as.kolkokrzyzyk;
 
 import as.kolkokrzyzyk.gameutils.DrawPlayer;
+import as.kolkokrzyzyk.gameutils.LogicGame;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,13 +17,35 @@ import javax.swing.JButton;
 public class GameWindow extends javax.swing.JFrame {
     private boolean player = false;
     private Player p1, p2;
+    private JButton [] [] buttonTable;
+    private LogicGame logicGame;
     /**
      * Creates new form GameWindow
      */
     public GameWindow() {
         initComponents();
+        setTitle("Kółko i krzyżyk"); //Ustawienie tytułu okna
+        //Po uruchomieniu okno pojawia się na środku ekranu
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         initGame();
+        initButtons();
         setCircleOrCrossToAllButtons();
+    }
+    
+    private void initButtons(){
+        buttonTable = new JButton[3][3];
+        buttonTable[0][0] = jButton11; //Bottom left corner
+        buttonTable[0][1] = jButton12; //Bottom center
+        buttonTable[0][2] = jButton13; //Bottom right corner
+        
+        buttonTable[1][0] = jButton21; //Center left 
+        buttonTable[1][1] = jButton22;
+        buttonTable[1][2] = jButton23; //Center right 
+        
+        buttonTable[2][0] = jButton31; //Top left corner
+        buttonTable[2][1] = jButton32; //Top center
+        buttonTable[2][2] = jButton33; //Top right corner
     }
     
     private void initGame(){
@@ -47,82 +68,69 @@ public class GameWindow extends javax.swing.JFrame {
             p1 = new Player("X", jTFPlayer1Name.getText());
             p2 = new Player("O", jTFPlayer2Name.getText());
         }
+        logicGame = new LogicGame();
+        System.out.println(logicGame);
     }
     /**
      * Set Listener to all buttons for circle or cross
      */
     private void setCircleOrCrossToAllButtons(){
-        jButton11.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                setCircleOrCross(evt);
+        for (int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                final int x = i;
+                final int y = j;
+                buttonTable[i][j].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        setCircleOrCross(x, y);
+                    }
+                });
             }
-        });
-        jButton12.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                setCircleOrCross(evt);
-            }
-        });
-        jButton13.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                setCircleOrCross(evt);
-            }
-        });
-         jButton21.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                setCircleOrCross(evt);
-            }
-        });
-        jButton22.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                setCircleOrCross(evt);
-            }
-        });
-        jButton23.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                setCircleOrCross(evt);
-            }
-        });
-         jButton31.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                setCircleOrCross(evt);
-            }
-        });
-        jButton32.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                setCircleOrCross(evt);
-            }
-        });
-        jButton33.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                setCircleOrCross(evt);
-            }
-        });
+        }
     }
     
     private void clearButtonText(){
-        jButton11.setText("");
-        jButton12.setText("");
-        jButton13.setText("");
-        jButton21.setText("");
-        jButton22.setText("");
-        jButton23.setText("");
-        jButton31.setText("");
-        jButton32.setText("");
-        jButton33.setText("");
+        for (int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                buttonTable[i][j].setText("");
+                buttonTable[i][j].setEnabled(true);
+            }
+        }
     }
     
-    private void setCircleOrCross(ActionEvent evt) {                                        
-        JButton b = (JButton) evt.getSource();
+    private void setCircleOrCross( int x, int y) {                                        
+        boolean isWinner = false;
         if(player){
-            b.setText(p1.getSign());
+            buttonTable[x][y].setText(p1.getSign());
+            if(p1.getSign().equals("O")) 
+                isWinner= logicGame.addPlayerMoveBoard(x, y, 1);
+            else
+                isWinner= logicGame.addPlayerMoveBoard(x, y, 2);
             jLPlayer1.setBackground(Color.GRAY);
             jLPlayer2.setBackground(Color.GREEN);
         } else {
-            b.setText(p2.getSign());
+            buttonTable[x][y].setText(p2.getSign());
+            if(p2.getSign().equals("O")) 
+                isWinner= logicGame.addPlayerMoveBoard(x, y, 1);
+            else
+                isWinner= logicGame.addPlayerMoveBoard(x, y, 2);
             jLPlayer1.setBackground(Color.GREEN);
             jLPlayer2.setBackground(Color.GRAY);
         }
-        player = !player; //Zmiana TRUE na FALS lub FLAS na TRUE
+        buttonTable[x][y].setEnabled(false);
+        System.out.println(logicGame+"\n");
+        //TODO sprawdzamy czy ktoś wygrał
+        //player = true means first player start
+        if(isWinner){
+            
+            JOptionPane.showMessageDialog(rootPane, "Wygral gracz: "+
+                    (player ? jTFPlayer1Name.getText() : jTFPlayer2Name.getText())
+            );
+            initGame();
+            clearButtonText();
+        } else {
+            player = !player; //Zmiana TRUE na FALS lub FLAS na TRUE
+        }
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -138,7 +146,7 @@ public class GameWindow extends javax.swing.JFrame {
         jLPlayer2 = new javax.swing.JLabel();
         jLPlayer1Sign = new javax.swing.JLabel();
         jLPlayer2Sign = new javax.swing.JLabel();
-        jBReset = new javax.swing.JButton();
+        jBNewGame = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
         jButton21 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
@@ -174,10 +182,10 @@ public class GameWindow extends javax.swing.JFrame {
         jLPlayer2Sign.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jLPlayer2Sign.setText("O");
 
-        jBReset.setText("Nowa Gra");
-        jBReset.addActionListener(new java.awt.event.ActionListener() {
+        jBNewGame.setText("Nowa Gra");
+        jBNewGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBResetActionPerformed(evt);
+                jBNewGameActionPerformed(evt);
             }
         });
 
@@ -222,6 +230,11 @@ public class GameWindow extends javax.swing.JFrame {
         jButton13.setMaximumSize(new java.awt.Dimension(60, 60));
         jButton13.setMinimumSize(new java.awt.Dimension(60, 60));
         jButton13.setPreferredSize(new java.awt.Dimension(60, 60));
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
 
         jButton23.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jButton23.setMargin(new java.awt.Insets(2, 2, 2, 2));
@@ -280,7 +293,7 @@ public class GameWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTFPlayer2Name)
-                    .addComponent(jBReset, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                    .addComponent(jBNewGame, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
                     .addComponent(jLPlayer2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -291,7 +304,7 @@ public class GameWindow extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRBPlayervsPlayer)
                     .addComponent(jRBPlayervsComputer)
-                    .addComponent(jBReset))
+                    .addComponent(jBNewGame))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFPlayer1Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -339,16 +352,20 @@ public class GameWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBResetActionPerformed
+    private void jBNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNewGameActionPerformed
         clearButtonText();
         initGame();
-    }//GEN-LAST:event_jBResetActionPerformed
+    }//GEN-LAST:event_jBNewGameActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton13ActionPerformed
 
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup;
-    private javax.swing.JButton jBReset;
+    private javax.swing.JButton jBNewGame;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
