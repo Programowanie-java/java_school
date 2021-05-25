@@ -7,7 +7,9 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import javax.swing.JPanel;
+import object.Ball;
 
 /**
  *
@@ -15,18 +17,37 @@ import javax.swing.JPanel;
  */
 public class Board extends JPanel{
     private final int DELAY = 25;
-    
+    private final int WIDTH = 800, HEIGHT = 600;
     int x_oval, y_oval = 0;
     boolean x_oval_flag, y_oval_flag = true;
     
-    int dim_x = 800, dim_y = 600;
+    private final int QUANTITY = 100;
+    ArrayList<Ball> ballsList;
     
     public Board(){
-        
         setBackground(Color.white);
-        setPreferredSize(new Dimension(800,600));
+        setPreferredSize(new Dimension(WIDTH,HEIGHT));
+        createBalls();
         startAnimation();
-        
+    }
+    
+    private void createBalls(){
+        ballsList = new ArrayList<>();
+        for (int i = 0; i<QUANTITY;i++){
+            ballsList.add(new Ball(WIDTH,HEIGHT) );
+        }
+    }
+    
+    private void paintBalls(Graphics2D g2d){
+        for (int i = 0; i<QUANTITY;i++){
+            ballsList.get(i).paintBall(g2d);
+        }
+    }
+    
+    private void moveBalls() {
+        for (int i = 0; i<QUANTITY;i++){
+            ballsList.get(i).moveBall();
+        }
     }
     
     @Override
@@ -40,7 +61,9 @@ public class Board extends JPanel{
         rh.put(RenderingHints.KEY_RENDERING,
                 RenderingHints.VALUE_RENDER_QUALITY);
         g2d.setRenderingHints(rh);
-        g2d.setStroke(new BasicStroke(4));
+        paintBalls(g2d);
+        Toolkit.getDefaultToolkit().sync();
+//        g2d.setStroke(new BasicStroke(4));
 //        g2d.setColor(Color.red);
 //        g2d.drawLine(10, 10, 10, 210);          //PIONOWA LEWA LINIA
 //        g2d.setColor(Color.blue);
@@ -52,26 +75,17 @@ public class Board extends JPanel{
 //        g2d.setColor(Color.BLACK);
 //        g2d.drawOval(10, 10, 200, 200);  //10 + 210 = 220 kończy się tu koło
         //g2d.setColor(new Color(200,100,240)); //Kolor za pomocą RGB
-        walkingOval(g2d);
-        Toolkit.getDefaultToolkit().sync();
 //        g2d.setColor(Color.BLACK);
     }
     
-    private void walkingOval(Graphics2D g2d){
-        g2d.setColor(Color.decode("#00A300"));
-        g2d.fillOval(x_oval, y_oval, 150, 150);
-        
-        
-        g2d.setColor(Color.decode("#00A3aa"));
-        g2d.fillOval(500, 400, 50, 50);
-    }
+    
     
     private void startAnimation(){
         new Thread(() -> {
             long beforeTime, timeDiff, sleep;
             while(true){
                 beforeTime = System.currentTimeMillis(); //pobranie czasu przed animacją
-                ovalMove();
+                moveBalls();    
                 repaint();
                 //Aby animacja była stałą i nie rwała!!!
                 timeDiff = System.currentTimeMillis() - beforeTime; //Czas po wykonaniu repaint()
@@ -85,34 +99,11 @@ public class Board extends JPanel{
                 } catch (InterruptedException ex) {
                     System.out.println("Coś poszło nie tak");
                 }
-                System.out.println(beforeTime+"  "+timeDiff+"   SLEEP = "+sleep);
+                //System.out.println(beforeTime+"  "+timeDiff+"   SLEEP = "+sleep);
             }
         }).start();
     }
+
     
-    private void ovalMove(){
-        if(x_oval_flag){
-            x_oval++;
-        } else {
-            x_oval--;
-        }
-        
-        if(y_oval_flag){
-            y_oval++;
-        } else {
-            y_oval--;
-        }
-        if(x_oval+150>=800){
-             x_oval_flag = false;           
-        }
-        if(x_oval<=0){
-             x_oval_flag = true;           
-        }
-        if(y_oval+180>=600){
-            y_oval_flag = false;
-        }
-        if(y_oval <= 0){
-            y_oval_flag = true;
-        }
-    }
+    
 }
