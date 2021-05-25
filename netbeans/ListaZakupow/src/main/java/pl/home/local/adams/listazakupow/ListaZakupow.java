@@ -62,6 +62,12 @@ public class ListaZakupow extends javax.swing.JFrame{
 
         jLabel1.setText("Wpisz co kupiłeś");
 
+        jTFCoKupiles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFCoKupilesActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Podaj wartość");
 
         jLabel3.setText("Data zakupu");
@@ -204,6 +210,10 @@ public class ListaZakupow extends javax.swing.JFrame{
         stf.saveToFile(text);
     }//GEN-LAST:event_jBSaveActionPerformed
 
+    private void jTFCoKupilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFCoKupilesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFCoKupilesActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -252,7 +262,6 @@ public class ListaZakupow extends javax.swing.JFrame{
                 } else {
                     jTFCoKupiles.setEditable(false);
                 }
-                
             }
 
             @Override
