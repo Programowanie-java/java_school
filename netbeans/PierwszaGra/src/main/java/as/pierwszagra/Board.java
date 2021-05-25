@@ -14,7 +14,7 @@ import javax.swing.JPanel;
  * @author adams
  */
 public class Board extends JPanel{
-    private final int DELAY = 200;
+    private final int DELAY = 25;
     
     int x_oval, y_oval = 0;
     boolean x_oval_flag, y_oval_flag = true;
@@ -34,14 +34,12 @@ public class Board extends JPanel{
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g; //RYSOWANIE PO PŁUTNIE - g2d - myśl o tym jako ołówku
         //Dla lepszego poruszania się - bardziej płynnego!
-//        RenderingHints rh
-//        = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
-//                RenderingHints.VALUE_ANTIALIAS_ON);
-//
-//        rh.put(RenderingHints.KEY_RENDERING,
-//                RenderingHints.VALUE_RENDER_QUALITY);
-//
-//        g2d.setRenderingHints(rh);
+        RenderingHints rh
+        = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+        rh.put(RenderingHints.KEY_RENDERING,
+                RenderingHints.VALUE_RENDER_QUALITY);
+        g2d.setRenderingHints(rh);
         g2d.setStroke(new BasicStroke(4));
 //        g2d.setColor(Color.red);
 //        g2d.drawLine(10, 10, 10, 210);          //PIONOWA LEWA LINIA
@@ -62,19 +60,24 @@ public class Board extends JPanel{
     private void walkingOval(Graphics2D g2d){
         g2d.setColor(Color.decode("#00A300"));
         g2d.fillOval(x_oval, y_oval, 150, 150);
+        
+        
+        g2d.setColor(Color.decode("#00A3aa"));
+        g2d.fillOval(500, 400, 50, 50);
     }
     
     private void startAnimation(){
         new Thread(() -> {
             long beforeTime, timeDiff, sleep;
-            beforeTime = System.currentTimeMillis(); //pobranie czasu przed animacją
             while(true){
+                beforeTime = System.currentTimeMillis(); //pobranie czasu przed animacją
                 ovalMove();
                 repaint();
-                
                 //Aby animacja była stałą i nie rwała!!!
                 timeDiff = System.currentTimeMillis() - beforeTime; //Czas po wykonaniu repaint()
+                
                 sleep = DELAY - timeDiff;
+//                 sleep = DELAY;
                 if(sleep < 0) sleep = 2;
                 
                 try {
@@ -82,12 +85,12 @@ public class Board extends JPanel{
                 } catch (InterruptedException ex) {
                     System.out.println("Coś poszło nie tak");
                 }
+                System.out.println(beforeTime+"  "+timeDiff+"   SLEEP = "+sleep);
             }
         }).start();
     }
     
     private void ovalMove(){
-        
         if(x_oval_flag){
             x_oval++;
         } else {
