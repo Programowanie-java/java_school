@@ -17,10 +17,10 @@ import object.Ball;
  */
 public class Board extends JPanel{
     private final int DELAY = 25;
-    private final int WIDTH = 800, HEIGHT = 600;
+    private final int WIDTH = 795, HEIGHT = 560;
     int x_oval, y_oval = 0;
-    boolean x_oval_flag, y_oval_flag = true;
-    
+    private boolean x_oval_flag, y_oval_flag = true, flagThread = true;
+    private Thread thred;
     private final int QUANTITY = 100;
     ArrayList<Ball> ballsList;
     
@@ -28,7 +28,8 @@ public class Board extends JPanel{
         setBackground(Color.white);
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
         createBalls();
-        startAnimation();
+        //startAnimation();
+        //startThreadAnimation();
     }
     
     private void createBalls(){
@@ -78,18 +79,24 @@ public class Board extends JPanel{
 //        g2d.setColor(Color.BLACK);
     }
     
+    public void startThreadAnimation(){
+        startAnimation();
+        thred.start();
+    }
     
+    public void stopThreadAnimation(){
+        thred = null;
+    }
     
     private void startAnimation(){
-        new Thread(() -> {
+        thred = new Thread(() -> {
             long beforeTime, timeDiff, sleep;
-            while(true){
+            while(flagThread){
                 beforeTime = System.currentTimeMillis(); //pobranie czasu przed animacją
                 moveBalls();    
                 repaint();
                 //Aby animacja była stałą i nie rwała!!!
                 timeDiff = System.currentTimeMillis() - beforeTime; //Czas po wykonaniu repaint()
-                
                 sleep = DELAY - timeDiff;
 //                 sleep = DELAY;
                 if(sleep < 0) sleep = 2;
@@ -101,9 +108,16 @@ public class Board extends JPanel{
                 }
                 //System.out.println(beforeTime+"  "+timeDiff+"   SLEEP = "+sleep);
             }
-        }).start();
+        });
+        
     }
 
-    
-    
+    public boolean isFlagThread() {
+        return flagThread;
+    }
+
+    public void setFlagThread(boolean flagThread) {
+        this.flagThread = flagThread;
+    }
+
 }

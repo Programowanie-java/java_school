@@ -49,6 +49,7 @@ public class LayoutSample extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPFlowLayout = new javax.swing.JPanel();
         jBAdd = new javax.swing.JButton();
+        jSpinner1 = new javax.swing.JSpinner();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -162,6 +163,7 @@ public class LayoutSample extends javax.swing.JFrame {
             }
         });
         jPFlowLayout.add(jBAdd);
+        jPFlowLayout.add(jSpinner1);
 
         jTabbedPane1.addTab("FlowLayout", jPFlowLayout);
 
@@ -326,6 +328,7 @@ public class LayoutSample extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }

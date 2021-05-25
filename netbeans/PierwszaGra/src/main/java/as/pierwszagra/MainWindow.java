@@ -1,6 +1,8 @@
 package as.pierwszagra;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.GridLayout;
 import javax.swing.JFrame;
 
 /**
@@ -8,16 +10,23 @@ import javax.swing.JFrame;
  * @author adams
  */
 public class MainWindow extends JFrame{
-    
+    private final int WIDTH = 800, HEIGHT = 600;
     public MainWindow(){
         initUI();
-        add(new Board());
-        //pack();
+        
+        
+        Board board = new Board();
+        board.setBounds(0, 40, WIDTH, HEIGHT-40);
+        OptionPanel op = new OptionPanel(board);
+        op.setBounds(0, 0, WIDTH, 40);
+        add(op);
+        add(board);
     }
     
     private void initUI(){
-        setSize(800, 600);
+        setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(null);
         setLocationRelativeTo(null);
         setResizable(false);
     }
