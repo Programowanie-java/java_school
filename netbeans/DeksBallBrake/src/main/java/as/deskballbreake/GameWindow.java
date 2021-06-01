@@ -25,7 +25,7 @@ public class GameWindow extends JFrame implements StaticData{
         setLayout(null);
         setVisible(true);
         setResizable(false);
-        addKeyListener(new Key());
+        //addKeyListener(new Key());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
@@ -49,11 +49,11 @@ public class GameWindow extends JFrame implements StaticData{
                 System.out.println("Key => keyPressed "+e.getKeyCode());
                 if(e.getKeyCode() == KeyEvent.VK_LEFT){
                         System.out.println("Key => VK_LEFT");
-                        bg.player.move(false);
+                        //bg.player.move(false);
                 }
                 if(e.getKeyCode() == KeyEvent.VK_RIGHT){
                         System.out.println("Key => VK_RIGHT");
-                        bg.player.move(true);
+                        //bg.player.move(true);
                 }
         }
     }
