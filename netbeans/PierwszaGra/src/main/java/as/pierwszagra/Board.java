@@ -1,6 +1,5 @@
 package as.pierwszagra;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -21,7 +20,7 @@ public class Board extends JPanel{
     int x_oval, y_oval = 0;
     private boolean x_oval_flag, y_oval_flag = true, flagThread = true;
     private Thread thred;
-    private final int QUANTITY = 100;
+    private final int QUANTITY = 50;
     ArrayList<Ball> ballsList;
     
     public Board(){
@@ -80,11 +79,13 @@ public class Board extends JPanel{
     }
     
     public void startThreadAnimation(){
+        flagThread = true;
         startAnimation();
         thred.start();
     }
     
     public void stopThreadAnimation(){
+        flagThread = false;
         thred = null;
     }
     

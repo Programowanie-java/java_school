@@ -9,9 +9,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 
 /**
  *
@@ -39,7 +41,6 @@ public class OptionPanel extends JPanel{
                 board.stopThreadAnimation();
                 stopButton.setText("START");
             }
-            
         });
         add(stopButton);
         JButton resetButton = new JButton("RESET");
@@ -50,9 +51,18 @@ public class OptionPanel extends JPanel{
             System.exit(0);
         });
         add(closeButton);
-        JSpinner jsBallsQuantity = new JSpinner();
-        jsBallsQuantity.setValue(100);
+        //Aby ustawić 50 - wartość początkową 1 - 100 zakres   1 - o ile się zmienia
+        //zawartość naszego spinera
+        SpinnerNumberModel model = new SpinnerNumberModel(50.0, 1.0, 100.0, 1.0);  
+        JSpinner jsBallsQuantity = new JSpinner(model);
+        //Aby ustawić tekst w spinerze na środku!!!
+        JSpinner.DefaultEditor se = (JSpinner.DefaultEditor)jsBallsQuantity.getEditor();
+        se.getTextField().setHorizontalAlignment(JTextField.CENTER);
         add(jsBallsQuantity);
+        
+        JLabel label = new JLabel("v 0.2");
+        label.setHorizontalAlignment(JLabel.CENTER);
+        add(label);
     }
         
 }
