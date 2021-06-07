@@ -1,5 +1,6 @@
 package gameboard;
 
+import actors.HotBall;
 import actors.Player;
 import as.deskballbreake.interfaces.StaticData;
 import java.awt.Color;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -25,13 +27,18 @@ public class BoardGame extends JPanel implements StaticData{
     
     private int WIDTH, HEIGHT;
     private int DELAY = 10;
+    private int gameTime = 0;
+    private OptionGame og;
     private Player player;  //Nasz prostokąt na dole
+    private HotBall hotBall;
     private ArrayList<Player> playersList = new ArrayList<>();
+    
     Thread thread; //NASZ GŁÓWNY WĄTEK!!!
 
-    public BoardGame(int WIDTH, int HEIGHT) {
+    public BoardGame(int WIDTH, int HEIGHT, OptionGame og) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
+        this.og = og;
         init();
         startGame();
         thread.start();
@@ -40,6 +47,7 @@ public class BoardGame extends JPanel implements StaticData{
     private void init(){
         //addKeyListener(new Key());
         initPlayers(StaticData.PLAYERS_QUANTITY);
+        initHotBall();
     }
     
     private void initPlayers(int quantity){
@@ -48,10 +56,21 @@ public class BoardGame extends JPanel implements StaticData{
         for (int i=0; i< quantity;i++){
             width = r.nextInt(100)+20;
             height = r.nextInt(10)+10;
-            playersList.add(new Player(r.nextInt(WIDTH-width), r.nextInt(HEIGHT-height), 
+            playersList.add(new Player(r.nextInt(WIDTH-width-10), r.nextInt(HEIGHT-height-20), 
                     WIDTH, HEIGHT, width, height, r.nextInt(4)+1, r.nextInt(4)+1,
-                    new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256))));
+                    new Color(r.nextInt(236)+20,r.nextInt(236)+20,r.nextInt(236)+20))
+            );
         }
+    }
+    
+    private void initHotBall(){
+        Random r = new Random();
+//        int width = 0, height = 0;
+//        width = r.nextInt(100)+20;
+//        height = r.nextInt(10)+10;
+        hotBall = new HotBall(r.nextInt(WIDTH-30), r.nextInt(HEIGHT-40), 
+                    WIDTH, HEIGHT, 20, 20, r.nextInt(4)+1, r.nextInt(4)+1,
+                    Color.YELLOW);
     }
     
     private void movePlayers(){
@@ -60,6 +79,10 @@ public class BoardGame extends JPanel implements StaticData{
         }
     }
 
+    private void moveHotBall(){
+        hotBall.move();
+    }
+    
     @Override
     protected void paintComponent(Graphics g) {
         //super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
@@ -78,9 +101,12 @@ public class BoardGame extends JPanel implements StaticData{
             g2.fillRect(playersList.get(i).getX(), playersList.get(i).getY(), playersList.get(i).getWidth(), playersList.get(i).getHeight());
         }
         
-        g2.setColor(Color.YELLOW);
-        g2.fillOval(150, 200, 20, 20);
+        //Obiekt niszczący graczy
+        g2.setColor(hotBall.getColor());
+        g2.fillRect(hotBall.getX(), hotBall.getY(), hotBall.getWidth(), hotBall.getHeight());
         
+        og.setPlayersNumber(playersList.size());
+        og.setGameTime(gameTime/100);
         Toolkit.getDefaultToolkit().sync();
     }
     
@@ -88,11 +114,14 @@ public class BoardGame extends JPanel implements StaticData{
         thread = new Thread(() -> {
             long beforeTime, timeDiff, sleep;
             while(true){
+                if(playersList.size() <1) break;
+                gameTime++;
                 beforeTime = System.currentTimeMillis(); //pobranie czasu przed animacją
                 //===========================================================   
                 movePlayers();
+                moveHotBall();
                 repaint();
-                collisionDetection();
+               
                 //Aby animacja była stała i nie rwała!!!
                 timeDiff = System.currentTimeMillis() - beforeTime; //Czas po wykonaniu repaint()
                 sleep = DELAY - timeDiff;
@@ -103,8 +132,11 @@ public class BoardGame extends JPanel implements StaticData{
                 } catch (InterruptedException ex) {
                     System.out.println("Coś poszło nie tak");
                 }
-                System.out.println(" Czas: "+timeDiff+"   SLEEP = "+sleep);
+                 //collisionDetection();
+                 collisionDetectionHotBallPlayers();
+                //System.out.println(" Czas: "+timeDiff+"   SLEEP = "+sleep);
             }
+            JOptionPane.showMessageDialog(this, "GAME OVER");
         });
     }
     
@@ -119,7 +151,6 @@ public class BoardGame extends JPanel implements StaticData{
                     if(p1.intersects(p2)){
                         playersList.remove(j);
                         playersList.remove(i);
-                        break;
                     } else {
                     }
                 }
@@ -127,4 +158,17 @@ public class BoardGame extends JPanel implements StaticData{
             }
         }
     }
+    
+    private void collisionDetectionHotBallPlayers(){
+        Rectangle p1,hb;
+        hb = hotBall.getBounds();
+        for(int j=0;j<playersList.size();j++){
+            p1 = playersList.get(j).getBounds();
+            if(p1.intersects(hb)){
+                playersList.remove(j);
+            } else {
+            }
+        }
+    }
+    
 }

@@ -12,6 +12,7 @@ public class Player{
     private int speed = 2;
     private int speed_x, speed_y;
     private Color color;
+    
     public Player(int x) {
         this.x = x;
     }

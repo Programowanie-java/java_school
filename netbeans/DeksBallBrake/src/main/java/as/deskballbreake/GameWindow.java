@@ -31,8 +31,10 @@ public class GameWindow extends JFrame implements StaticData{
     
     private void initUI(){
         int heightOptionGame = 40;
-        bg = new BoardGame(StaticData.WIDTH, StaticData.HEIGHT-heightOptionGame);
+        
         OptionGame og = new OptionGame(StaticData.WIDTH, StaticData.HEIGHT);
+        
+        bg = new BoardGame(StaticData.WIDTH, StaticData.HEIGHT-heightOptionGame,og);
         
         og.setBounds(0, 0, StaticData.WIDTH, heightOptionGame);
         bg.setBounds(0, heightOptionGame, StaticData.WIDTH, StaticData.HEIGHT-heightOptionGame);
